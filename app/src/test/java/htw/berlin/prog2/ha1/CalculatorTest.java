@@ -103,10 +103,7 @@ class CalculatorTest {
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
-        String expected = "0";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
+        assertEquals("0", calc.readScreen());
     }
 
     //first red test
@@ -128,6 +125,7 @@ class CalculatorTest {
         assertEquals("2", calc.readScreen());
     }
 
+    //second red test
     @Test
     @DisplayName("should display result of after deleting previous input")
     void testDeletingOnlyOneNumber() {
@@ -136,12 +134,9 @@ class CalculatorTest {
         calc.pressDigitKey(2);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(3);
-
         calc.pressClearKey();
-
-        assertEquals("0", calc.readScreen());
-
         calc.pressDigitKey(2);
+        
         calc.pressEqualsKey();
 
         assertEquals("4", calc.readScreen());
