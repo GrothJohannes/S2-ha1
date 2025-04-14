@@ -109,6 +109,8 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+
+    //unnötig
     @Test
     @DisplayName("should display result of after deleting previous input")
     void testDeletingOnlyOneNumber() {
@@ -126,6 +128,26 @@ class CalculatorTest {
         calc.pressEqualsKey();
 
         assertEquals("4", calc.readScreen());
+    }
+
+
+    //first red test
+    @Test
+    @DisplayName("should display the correct result of the last equation")
+    void testInputAfterEquationWithoutDeleting() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressEqualsKey();
+
+        assertEquals("2", calc.readScreen());
     }
 }
 
