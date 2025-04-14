@@ -16,6 +16,8 @@ public class Calculator {
 
     private boolean finalResult = false;
 
+    private boolean isCleared = true;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -41,6 +43,7 @@ public class Calculator {
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
+        isCleared = false;
     }
 
     /**
@@ -52,9 +55,14 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if (isCleared) {
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+        } else {
+            screen = "0";
+            isCleared = true;
+        }
     }
 
     /**
@@ -69,6 +77,7 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        isCleared = false;
     }
 
     /**
@@ -90,6 +99,7 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        isCleared = false;
 
     }
 
@@ -136,6 +146,7 @@ public class Calculator {
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        isCleared = false;
         finalResult = true;
     }
 }
